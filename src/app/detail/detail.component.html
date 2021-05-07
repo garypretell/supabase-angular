@@ -1,0 +1,25 @@
+<form class="row row-cols-lg-auto g-3 align-items-center">
+  <h2>Tasks </h2><span role="button" class="badge bg-primary" (click)="createTodo()">Nuevo</span>
+</form>
+<div class="container" *ngIf="data?.todos as todos">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Task</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of todos; let i = index">
+        <td>{{ pageSize * (pageIndex) + i + 1}}</td>
+        <td>{{item.id}}</td>
+        <td>{{item.task}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-container *ngIf="todos | async as todos" >
+  <pager [itemCount]="todos.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize" (click)="pagination(pageIndex)">
+  </pager>
+</ng-container>
